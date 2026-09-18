@@ -3,6 +3,7 @@
 Estúdio de edição e agendamento de conteúdo para as redes da **Porcin.IA**, a IA para suinocultura brasileira. Infraestrutura compartilhada da agência (mesmo cinto de ferramentas dos estúdios irmãos); posicionamento desta marca.
 
 - **`FRAMEWORK.md`**: persona, regras, pilares, escolha de framework de motion, assinaturas de edição e fluxo por vídeo.
+- **`PROPOSTA-MARCA.md`**: proposta de persona, pilares, CTA e regras, tirada do material da cliente no Drive. Aguarda aprovação; quando aprovada, migra para o `FRAMEWORK.md`.
 - **`CLAUDE.md`**: memória persistente do projeto (o que se sabe da marca, IDs, contas, rede, gotchas).
 - **`SETUP.md`**: configuração do environment, conectores e validação.
 - **`projects/`**: um subdiretório por vídeo (briefing, transcrição, `edl.json`, caption).

@@ -15,6 +15,20 @@ Tudo abaixo veio do material que a agência já produziu para a marca (deck `Por
 - **Temas já pautados**: higienização e biofilme, desinfetante e detergente, biosseguridade, nutrição (proteína ideal, energia, água), mercado e restrição alimentar, desmame e creche (as 48 horas críticas), lembretes de vacina e manejo.
 - **Identidade visual**: logo de focinho de porco em traço de circuito, degradê azul profundo (esquerda) para magenta (direita) passando por lavanda, pontas ciano, sobre branco. Paleta medida no `Logo_Porcin.png` e registrada em `remotion/src/marca.ts` como hipótese. Fonte da marca: **PENDENTE** (deck inacessível deste container).
 
+## Proposta de posicionamento aguardando aprovação
+
+`PROPOSTA-MARCA.md` na raiz: persona, voz, pilares, CTA e regras inegociáveis tiradas do Drive da cliente em 18/set/2026, com a origem de cada afirmação. **Nada ali está aprovado**, então continua valendo a regra de não publicar texto que dependa de posicionamento. Três decisões travam a aprovação: grafia do nome em texto público, quem apresenta o vídeo (avatar do porco ou a fundadora) e a linha de credencial da fundadora.
+
+Achados que já valem como restrição de produção, porque são instrução escrita da cliente:
+
+- **O porco da marca não tem mãos** (briefing de logo e avatar, em caixa alta). Vale para toda imagem gerada por IA.
+- **Não recomendar corte de dentes e de cauda**: legislação nova, caracterizado como mutilação (revisão do post 22 pela cliente).
+- **Rastreamento é por lote e por matriz**, nunca por animal individual (mesma revisão).
+- **O veterinário decide**: a marca orienta e prepara a conversa, não diagnostica.
+- A voz da marca mudou entre junho e setembro de 2026, de listicle com número forte para cena concreta com hedge. A referência é a pauta de setembro e outubro.
+
+**Segurança**: o documento `Modelo` em `Conteudo/Dados` no Drive da cliente guarda senha do Instagram e do TikTok em texto puro. Nunca copiar esses valores para cá (repo público). Foi reportado ao usuário em 18/set/2026 para troca.
+
 ## Regras que valem em qualquer resposta pública
 
 - Nunca usar travessão em texto público (caption, lettering, legenda): reescrever a frase.
