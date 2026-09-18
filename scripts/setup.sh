@@ -97,28 +97,25 @@ fi
 # environment, e ai o comando recusa reportar sucesso mesmo com o npm liberado.
 # O clone ja traz todas as skills em skills/<nome>/SKILL.md, entao o fallback e
 # registra-las direto, sem depender da rede.
-if ! npx --yes hyperframes skills update 2>/dev/null; then
-  echo "hyperframes skills update indisponivel; registrando do clone local"
-  mkdir -p ~/.claude/skills
-  n=0
-  for d in "$HYPERFRAMES"/skills/*/; do
-    [ -f "$d/SKILL.md" ] || continue
-    ln -sfn "${d%/}" ~/.claude/skills/"$(basename "$d")"
-    n=$((n+1))
-  done
-  echo "$n skills do hyperframes registradas a partir de $HYPERFRAMES/skills"
-fi
-
-# Browser para o render local do HyperFrames. O download proprio dele (browser
-# ensure) esta fora da allowlist, mas o headless_shell do Playwright ja vem na
-# imagem e serve. O caminho carrega a versao no nome, entao um symlink estavel
-# e o que o .claude/settings.json aponta em HYPERFRAMES_BROWSER_PATH.
-_hs="$(ls -d /opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell 2>/dev/null | sort | tail -1)"
-if [ -n "$_hs" ]; then
-  ln -sfn "$_hs" /usr/local/bin/hf-headless-shell && echo "hf-headless-shell -> $_hs"
-else
-  echo "AVISO: headless_shell do Playwright nao encontrado; render local do HyperFrames indisponivel"
-fi
+# Duas coisas independentes aqui, e a ordem importa.
+# 1) Registrar as skills do clone SEMPRE, sem rede. E incondicional de proposito:
+#    o `skills update` do CLI "never expands a partial install", ou seja, em
+#    container zerado ele pode sair com sucesso sem instalar nada, e a sessao
+#    nasceria sem skill nenhuma. Enquanto isso foi um fallback de falha de rede,
+#    o bug ficou escondido porque a rede vivia bloqueada.
+mkdir -p ~/.claude/skills
+n=0
+for d in "$HYPERFRAMES"/skills/*/; do
+  [ -f "$d/SKILL.md" ] || continue
+  alvo=~/.claude/skills/"$(basename "$d")"
+  # nao mexer se ja existe como diretorio real (instalado pelo proprio CLI)
+  if [ -d "$alvo" ] && [ ! -L "$alvo" ]; then continue; fi
+  ln -sfn "${d%/}" "$alvo" && n=$((n+1))
+done
+echo "$n skills do hyperframes registradas a partir de $HYPERFRAMES/skills"
+# 2) Atualizar pelo CLI, melhor esforco. Precisa de NODE_USE_ENV_PROXY (acima),
+#    senao o fetch do Node ignora o proxy e o manifesto fica inalcancavel.
+npx --yes hyperframes skills update 2>/dev/null || echo "skills update indisponivel (segue com as do clone)"
 
 echo "== 4/6 Remotion =="
 # O Remotion e React; as composicoes ficam versionadas em remotion/ e so as

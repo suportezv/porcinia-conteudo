@@ -11,7 +11,7 @@ No Mac: clonar `video-use` e `hyperframes` em `~/video-editor/`, usar o ffmpeg-f
 
 ## Environment (Claude Code cloud)
 
-Network **Custom** com `drive.google.com`, `drive.usercontent.google.com` e `api.elevenlabs.io` na lista de domínios, mais a env var `ELEVENLABS_API_KEY` e o setup script com **caminho absoluto**: `bash /home/user/porcinia-conteudo/scripts/setup.sh` (o relativo falha, ver `CLAUDE.md`, "Rede do environment"). Configura-se no seletor de nuvem acima da caixa de mensagem em claude.ai/code. **Mudanças valem para sessões novas.**
+Network **Custom** com `drive.google.com`, `drive.usercontent.google.com` e `api.elevenlabs.io` na lista de domínios, mais a env var `ELEVENLABS_API_KEY` e o setup script com **caminho absoluto**: `bash /home/user/porcinia-conteudo/scripts/setup.sh`. **Configurado e conferido em 18/set/2026** (o relativo falhava com exit 127; ver `CLAUDE.md`, "Rede do environment"). Configura-se no seletor de nuvem acima da caixa de mensagem em claude.ai/code. **Mudanças valem para sessões novas.**
 
 Geração de imagem e upload para o Drive (estado em 18/set/2026, depois da liberação):
 
