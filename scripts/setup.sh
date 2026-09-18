@@ -106,6 +106,17 @@ if ! npx --yes hyperframes skills update 2>/dev/null; then
   echo "$n skills do hyperframes registradas a partir de $HYPERFRAMES/skills"
 fi
 
+# Browser para o render local do HyperFrames. O download proprio dele (browser
+# ensure) esta fora da allowlist, mas o headless_shell do Playwright ja vem na
+# imagem e serve. O caminho carrega a versao no nome, entao um symlink estavel
+# e o que o .claude/settings.json aponta em HYPERFRAMES_BROWSER_PATH.
+_hs="$(ls -d /opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell 2>/dev/null | sort | tail -1)"
+if [ -n "$_hs" ]; then
+  ln -sfn "$_hs" /usr/local/bin/hf-headless-shell && echo "hf-headless-shell -> $_hs"
+else
+  echo "AVISO: headless_shell do Playwright nao encontrado; render local do HyperFrames indisponivel"
+fi
+
 echo "== 4/6 Remotion =="
 # O Remotion e React; as composicoes ficam versionadas em remotion/ e so as
 # dependencias sao instaladas aqui. O render usa o headless_shell do Playwright

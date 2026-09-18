@@ -1,0 +1,6 @@
+{
+  "env": {
+    "HYPERFRAMES_BROWSER_PATH": "/usr/local/bin/hf-headless-shell",
+    "HYPERFRAMES_SKIP_SKILLS": "1"
+  }
+}

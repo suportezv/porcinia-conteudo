@@ -9,6 +9,15 @@ VIDEO_USE="$TOOLS_DIR/browser-use/video-use"
 FF_PATH="/opt/homebrew/opt/ffmpeg-full/bin"
 [ -d "$FF_PATH" ] && export PATH="$FF_PATH:$PATH"
 
+# npx precisa do registry: registry.npmjs.org vem em no_proxy e bate direto no
+# firewall (403); pelo agent proxy responde. Mesmo contorno do setup.sh.
+if [ -n "${HTTPS_PROXY:-}" ]; then
+  export no_proxy="" NO_PROXY="" HTTP_PROXY="$HTTPS_PROXY"
+  export npm_config_proxy="$HTTPS_PROXY" npm_config_https_proxy="$HTTPS_PROXY"
+  export npm_config_noproxy="" npm_config_cafile="${SSL_CERT_FILE:-/root/.ccr/ca-bundle.crt}"
+fi
+HYPERFRAMES_DIR="$TOOLS_DIR/heygen-com/hyperframes"
+
 echo "== 1. ffmpeg: subtitles + zscale =="
 N=$(ffmpeg -filters 2>/dev/null | grep -cE "subtitles|zscale")
 if [ "${N:-0}" -ge 2 ]; then echo "OK ($N filtros)"; else echo "FALHOU (esperado >=2, obtido ${N:-0})"; fi
@@ -88,6 +97,34 @@ echo "== 6. Skills registradas =="
 HF=$(ls -d ~/.claude/skills/*/ 2>/dev/null | while read -r d; do [ -f "$d/SKILL.md" ] && basename "$d"; done | grep -cE 'hyperframes|media-use|motion-graphics|embedded-captions')
 if [ "${HF:-0}" -ge 4 ]; then echo "OK hyperframes ($HF skills com SKILL.md)"; else echo "PENDENTE hyperframes (rode scripts/setup.sh)"; fi
 
-echo "== 7. Na sessão do Claude, validar ainda: =="
+echo "== 7. HyperFrames (render real de um projeto em branco) =="
+HF_SHELL="${HYPERFRAMES_BROWSER_PATH:-/usr/local/bin/hf-headless-shell}"
+if [ ! -x "$HF_SHELL" ]; then
+  echo "PENDENTE: headless_shell para o HyperFrames ausente em $HF_SHELL (rode scripts/setup.sh)"
+else
+  # O template carrega o GSAP de cdn.jsdelivr.net; com o CDN fora da allowlist o
+  # render e bloqueado. O clone do hyperframes traz uma copia local, entao o teste
+  # troca a URL e prova o pipeline (browser, captura, ffmpeg) sem depender do CDN.
+  _hf="$(mktemp -d)"
+  _gsap="$(find "$HYPERFRAMES_DIR/skills" -name gsap.min.js 2>/dev/null | head -1)"
+  if (cd "$_hf" && HYPERFRAMES_SKIP_SKILLS=1 HYPERFRAMES_BROWSER_PATH="$HF_SHELL" npx --yes hyperframes init hfsmoke --example blank --non-interactive --resolution portrait >/dev/null 2>&1) \
+     && [ -n "$_gsap" ] && mkdir -p "$_hf/hfsmoke/vendor" && cp "$_gsap" "$_hf/hfsmoke/vendor/" \
+     && sed -i 's#https://cdn.jsdelivr.net/npm/gsap@[0-9.]*/dist/gsap.min.js#./vendor/gsap.min.js#' "$_hf/hfsmoke/index.html" \
+     && (cd "$_hf/hfsmoke" && HYPERFRAMES_SKIP_SKILLS=1 HYPERFRAMES_BROWSER_PATH="$HF_SHELL" npx --yes hyperframes render . --output "$_hf/out.mp4" >/dev/null 2>&1) \
+     && [ -s "$_hf/out.mp4" ]; then
+    echo "OK (HyperFrames renderizou $(ffprobe -v error -select_streams v -show_entries stream=nb_frames -of csv=p=0 "$_hf/out.mp4") frames com GSAP local)"
+  else
+    echo "FALHA: HyperFrames nao renderizou (browser, ffmpeg ou npx); rode npx hyperframes doctor"
+  fi
+  rm -rf "$_hf"
+  C=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 https://cdn.jsdelivr.net/)
+  if [ "$C" = "000" ] || [ "$C" = "403" ]; then
+    echo "PENDENTE allowlist: cdn.jsdelivr.net (templates e blocos do registry do HyperFrames carregam GSAP de la; sem isso so composicao com vendor local)"
+  else
+    echo "OK cdn.jsdelivr.net (HTTP $C)"
+  fi
+fi
+
+echo "== 8. Na sessão do Claude, validar ainda: =="
 echo " - Metricool: getBrandSettings lista a marca porcin.ia com blog_id 6741530"
 echo " - Kairogen: get_me_context mostra plano e créditos (conta atual: FREE, 0 créditos)"
