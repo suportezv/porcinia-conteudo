@@ -120,9 +120,10 @@ else
   echo "remotion/package.json ausente; passo pulado"
 fi
 
-echo "== 5/6 Python (PIL para overlays, numpy para batidas) =="
+echo "== 5/6 Python (PIL para overlays, numpy para batidas, colour-science para LUT) =="
 python3 -c 'import PIL' 2>/dev/null || pip3 install pillow || echo "AVISO: pillow não instalado (pypi bloqueado). Lettering/overlays indisponíveis."
 python3 -c 'import numpy' 2>/dev/null || pip3 install numpy || echo "AVISO: numpy não instalado (pypi bloqueado). Detecção de batidas indisponível."
+python3 -c 'import colour' 2>/dev/null || pip3 install colour-science || echo "AVISO: colour-science não instalado (pypi bloqueado). gera_lut_slog2.py indisponível."
 
 echo "== 6/6 estúdio =="
 STUDIO_NAME="$(basename "$REPO_ROOT")"
