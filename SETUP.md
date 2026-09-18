@@ -31,8 +31,9 @@ HyperFrames (estado em 18/set/2026):
 |---|---|---|
 | `.claude/settings.json` | `HYPERFRAMES_BROWSER_PATH` e `HYPERFRAMES_SKIP_SKILLS` para o CLI | versionado no repo; vale em sessão nova |
 | `/usr/local/bin/hf-headless-shell` | browser do render local (Playwright) | criado pelo `setup.sh` |
-| host `cdn.jsdelivr.net` | GSAP dos templates e blocos | **403, liberar** |
-| host `raw.githubusercontent.com` | registry de blocos (`hyperframes add`) e `skills update` | 403; opcional, as skills vêm do clone |
+| `NODE_USE_ENV_PROXY=1` e `NODE_EXTRA_CA_CERTS` | o `fetch` do Node ignora o proxy; sem isso o registry fica inalcançável | no `settings.json` e nos scripts |
+| `scripts/hf_vendor.sh` | baixa assets de CDN para `vendor/` e reescreve o HTML | obrigatório em toda peça (o navegador do render não busca asset remoto) |
+| hosts `cdn.jsdelivr.net`, `raw.githubusercontent.com` | GSAP dos templates; registry e skills | liberados em 18/set/2026 |
 
 ## Conectores (cada um exige ação do usuário)
 
@@ -54,7 +55,7 @@ Leitura: `401` é escopo ausente; `400`, `404` ou `422` é escopo presente e ped
 
 ## Validação final
 
-1. `bash scripts/validate.sh` todo verde: filtros do ffmpeg, `is_portrait_source` acertando retrato, paisagem e girado, chave da ElevenLabs, rede, render de 1 frame no Remotion, skills registradas, render de 300 frames no HyperFrames.
+1. `bash scripts/validate.sh` todo verde: filtros do ffmpeg, `is_portrait_source` acertando retrato, paisagem e girado, chave da ElevenLabs, rede, render de 1 frame no Remotion, skills registradas, render de 300 frames no HyperFrames e registry com 394 itens.
 2. Metricool: `getBrandSettings` lista `porcin.ia` com blog_id 6741530.
 3. Kairogen: `get_me_context` mostra plano e créditos.
 4. Teste de fumaça dos scripts: `python3 scripts/gera_imagem.py --listar` (depende das chaves) e `python3 scripts/zip_index_remoto.py list <id de ZIP público>`.

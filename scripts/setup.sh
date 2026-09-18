@@ -19,6 +19,9 @@ if [ -n "${HTTPS_PROXY:-}" ]; then
   export UV_DEFAULT_INDEX="https://pypi.org/simple"
   export npm_config_proxy="$HTTPS_PROXY" npm_config_https_proxy="$HTTPS_PROXY"
   export npm_config_noproxy="" npm_config_cafile="$SSL_CERT_FILE"
+  # O fetch nativo do Node ignora HTTPS_PROXY; sem isto o CLI do hyperframes nao
+  # alcanca o registry nem o manifesto de skills (README do agent proxy).
+  export NODE_USE_ENV_PROXY=1 NODE_EXTRA_CA_CERTS="$SSL_CERT_FILE"
 fi
 
 echo "== 1/6 ffmpeg =="

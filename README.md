@@ -6,7 +6,7 @@ Estúdio de edição e agendamento de conteúdo para as redes da **Porcin.IA**, 
 - **`CLAUDE.md`**: memória persistente do projeto (o que se sabe da marca, IDs, contas, rede, gotchas).
 - **`SETUP.md`**: configuração do environment, conectores e validação.
 - **`projects/`**: um subdiretório por vídeo (briefing, transcrição, `edl.json`, caption).
-- **`scripts/`**: setup e validação do ambiente, mais os scripts genéricos do estúdio (decupagem por âncora de texto, relatório, LUT S-Log2, índice remoto de ZIP, geração de imagem, upload para o Drive).
+- **`scripts/`**: setup e validação do ambiente, mais os scripts do estúdio (decupagem por âncora de texto, relatório, LUT S-Log2, índice remoto de ZIP, geração de imagem, upload para o Drive, vendorização de assets do HyperFrames).
 - **`remotion/`**: composições Remotion (React/TS). Paleta em `src/marca.ts`, rodapé em `src/Root.tsx`.
 - **`assets/fonts/`**: fontes embutidas para o render (sem rede de fontes no cloud).
 - **`.claude/settings.json`**: variáveis de ambiente da sessão (browser e skills do HyperFrames).

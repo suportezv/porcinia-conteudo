@@ -1,6 +1,8 @@
 {
   "env": {
     "HYPERFRAMES_BROWSER_PATH": "/usr/local/bin/hf-headless-shell",
-    "HYPERFRAMES_SKIP_SKILLS": "1"
+    "HYPERFRAMES_SKIP_SKILLS": "1",
+    "NODE_USE_ENV_PROXY": "1",
+    "NODE_EXTRA_CA_CERTS": "/root/.ccr/ca-bundle.crt"
   }
 }

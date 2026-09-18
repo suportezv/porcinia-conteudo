@@ -44,7 +44,7 @@ O estúdio mantém os dois, e a escolha **não é preferência do momento**: cad
 
 **Padrão declarado: HyperFrames.** Ele é o que está integrado ao fluxo do estúdio e o que tem as 20 skills. O Remotion entra por decisão consciente, não por inércia.
 
-Estado em 18/set/2026: o pipeline local do HyperFrames está validado (browser, captura, encode), mas templates e blocos carregam o GSAP de `cdn.jsdelivr.net`, ainda fora da allowlist. Até liberar, peça em HyperFrames exige GSAP copiado para `vendor/`; o Remotion é o único que renderiza uma peça sem contorno.
+Estado em 18/set/2026: os dois renderizam. O HyperFrames tem o pipeline local validado (browser, captura, encode) e o registry de 394 blocos e componentes acessível. Regra de ouro dele neste ambiente: **rodar `bash scripts/hf_vendor.sh <projeto>` antes do primeiro render**, porque o navegador do render não busca asset remoto (motivo técnico no `CLAUDE.md`). Sem isso o render é bloqueado com `sub_timeline_script_failure`.
 
 **Custo de manter os dois, para vigiar**: dois `node_modules`, dois caminhos de render e dois lugares onde a paleta pode divergir. O terceiro está mitigado: os tokens do Remotion vivem em `remotion/src/marca.ts`. **Se a paleta da marca mudar, atualizar os dois lados.** Se em alguns meses o Remotion não tiver sido usado em nada, ele vira peso morto e se corta; o inverso não vale, porque o HyperFrames é o que sustenta o fluxo.
 

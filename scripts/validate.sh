@@ -15,6 +15,7 @@ if [ -n "${HTTPS_PROXY:-}" ]; then
   export no_proxy="" NO_PROXY="" HTTP_PROXY="$HTTPS_PROXY"
   export npm_config_proxy="$HTTPS_PROXY" npm_config_https_proxy="$HTTPS_PROXY"
   export npm_config_noproxy="" npm_config_cafile="${SSL_CERT_FILE:-/root/.ccr/ca-bundle.crt}"
+  export NODE_USE_ENV_PROXY=1 NODE_EXTRA_CA_CERTS="${SSL_CERT_FILE:-/root/.ccr/ca-bundle.crt}"
 fi
 HYPERFRAMES_DIR="$TOOLS_DIR/heygen-com/hyperframes"
 
@@ -98,33 +99,45 @@ HF=$(ls -d ~/.claude/skills/*/ 2>/dev/null | while read -r d; do [ -f "$d/SKILL.
 if [ "${HF:-0}" -ge 4 ]; then echo "OK hyperframes ($HF skills com SKILL.md)"; else echo "PENDENTE hyperframes (rode scripts/setup.sh)"; fi
 
 echo "== 7. HyperFrames (render real de um projeto em branco) =="
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 HF_SHELL="${HYPERFRAMES_BROWSER_PATH:-/usr/local/bin/hf-headless-shell}"
 if [ ! -x "$HF_SHELL" ]; then
   echo "PENDENTE: headless_shell para o HyperFrames ausente em $HF_SHELL (rode scripts/setup.sh)"
 else
-  # O template carrega o GSAP de cdn.jsdelivr.net; com o CDN fora da allowlist o
-  # render e bloqueado. O clone do hyperframes traz uma copia local, entao o teste
-  # troca a URL e prova o pipeline (browser, captura, ffmpeg) sem depender do CDN.
+  # O template referencia o GSAP por CDN. O Chrome do render nao confia no CA do
+  # agent proxy, entao qualquer asset remoto morre com ERR_CERT_AUTHORITY_INVALID
+  # (nao e allowlist). scripts/hf_vendor.sh baixa com curl e reescreve para local;
+  # e assim que peca do estudio deve nascer, com asset congelado.
   _hf="$(mktemp -d)"
-  _gsap="$(find "$HYPERFRAMES_DIR/skills" -name gsap.min.js 2>/dev/null | head -1)"
-  if (cd "$_hf" && HYPERFRAMES_SKIP_SKILLS=1 HYPERFRAMES_BROWSER_PATH="$HF_SHELL" npx --yes hyperframes init hfsmoke --example blank --non-interactive --resolution portrait >/dev/null 2>&1) \
-     && [ -n "$_gsap" ] && mkdir -p "$_hf/hfsmoke/vendor" && cp "$_gsap" "$_hf/hfsmoke/vendor/" \
-     && sed -i 's#https://cdn.jsdelivr.net/npm/gsap@[0-9.]*/dist/gsap.min.js#./vendor/gsap.min.js#' "$_hf/hfsmoke/index.html" \
-     && (cd "$_hf/hfsmoke" && HYPERFRAMES_SKIP_SKILLS=1 HYPERFRAMES_BROWSER_PATH="$HF_SHELL" npx --yes hyperframes render . --output "$_hf/out.mp4" >/dev/null 2>&1) \
+  if (cd "$_hf" && HYPERFRAMES_SKIP_SKILLS=1 HYPERFRAMES_BROWSER_PATH="$HF_SHELL" \
+        npx --yes hyperframes init hfsmoke --example blank --non-interactive --resolution portrait >/dev/null 2>&1) \
+     && bash "$REPO_ROOT/scripts/hf_vendor.sh" "$_hf/hfsmoke" >/dev/null 2>&1 \
+     && (cd "$_hf/hfsmoke" && HYPERFRAMES_SKIP_SKILLS=1 HYPERFRAMES_BROWSER_PATH="$HF_SHELL" \
+        npx --yes hyperframes render . --output "$_hf/out.mp4" >/dev/null 2>&1) \
      && [ -s "$_hf/out.mp4" ]; then
-    echo "OK (HyperFrames renderizou $(ffprobe -v error -select_streams v -show_entries stream=nb_frames -of csv=p=0 "$_hf/out.mp4") frames com GSAP local)"
+    echo "OK (init + hf_vendor.sh + render: $(ffprobe -v error -select_streams v -show_entries stream=nb_frames -of csv=p=0 "$_hf/out.mp4") frames)"
   else
-    echo "FALHA: HyperFrames nao renderizou (browser, ffmpeg ou npx); rode npx hyperframes doctor"
+    echo "FALHA: HyperFrames nao renderizou; rode npx hyperframes doctor e confira $HF_SHELL"
   fi
   rm -rf "$_hf"
-  C=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 https://cdn.jsdelivr.net/)
-  if [ "$C" = "000" ] || [ "$C" = "403" ]; then
-    echo "PENDENTE allowlist: cdn.jsdelivr.net (templates e blocos do registry do HyperFrames carregam GSAP de la; sem isso so composicao com vendor local)"
-  else
-    echo "OK cdn.jsdelivr.net (HTTP $C)"
-  fi
 fi
 
-echo "== 8. Na sessão do Claude, validar ainda: =="
+echo "== 8. HyperFrames: registry e skills (fetch do Node pelo proxy) =="
+if [ "${NODE_USE_ENV_PROXY:-}" != "1" ]; then
+  echo "AVISO: NODE_USE_ENV_PROXY nao esta 1; o fetch do Node ignora o proxy e o registry fica inalcancavel"
+fi
+N=$(npx --yes hyperframes catalog --json 2>/dev/null | python3 -c 'import sys,json;d=json.load(sys.stdin);print(len(d if isinstance(d,list) else d.get("items",[])))' 2>/dev/null)
+if [ "${N:-0}" -gt 100 ]; then echo "OK (registry com $N itens)"; else echo "FALHA: registry inalcancavel ou vazio (${N:-0} itens)"; fi
+
+echo "== 9. Navegador do render x CA do proxy (gotcha permanente) =="
+_dom=$(timeout 90 "$HF_SHELL" --headless --no-sandbox --disable-gpu --proxy-server="${HTTPS_PROXY:-}" \
+  --dump-dom "https://cdn.jsdelivr.net/npm/gsap@3.14.2/package.json" 2>/dev/null | wc -c)
+if [ "${_dom:-0}" -gt 100 ]; then
+  echo "OK (o navegador passou a buscar asset remoto; hf_vendor.sh vira opcional, nao obrigatorio)"
+else
+  echo "ESPERADO: navegador nao busca asset remoto (ERR_CERT_AUTHORITY_INVALID). Toda peca precisa de scripts/hf_vendor.sh"
+fi
+
+echo "== 10. Na sessão do Claude, validar ainda: =="
 echo " - Metricool: getBrandSettings lista a marca porcin.ia com blog_id 6741530"
 echo " - Kairogen: get_me_context mostra plano e créditos (conta atual: FREE, 0 créditos)"
