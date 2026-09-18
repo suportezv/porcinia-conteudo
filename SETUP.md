@@ -13,17 +13,17 @@ No Mac: clonar `video-use` e `hyperframes` em `~/video-editor/`, usar o ffmpeg-f
 
 Network **Custom** com `drive.google.com`, `drive.usercontent.google.com` e `api.elevenlabs.io` na lista de domínios, mais a env var `ELEVENLABS_API_KEY` e o setup script com **caminho absoluto**: `bash /home/user/porcinia-conteudo/scripts/setup.sh` (o relativo falha, ver `CLAUDE.md`, "Rede do environment"). Configura-se no seletor de nuvem acima da caixa de mensagem em claude.ai/code. **Mudanças valem para sessões novas.**
 
-Para ligar a geração de imagem e o upload para o Drive, faltam neste environment (estado em 18/set/2026):
+Geração de imagem e upload para o Drive (estado em 18/set/2026, depois da liberação):
 
 | Item | Para quê | Estado |
 |---|---|---|
-| env var `OPENAI_API_KEY` | `scripts/gera_imagem.py openai` | ausente |
-| env var `GEMINI_API_KEY` | `scripts/gera_imagem.py gemini` | ausente |
-| host `api.openai.com` | idem | 403 no CONNECT |
-| host `generativelanguage.googleapis.com` | idem (liberar `www.googleapis.com` não cobre) | 403 no CONNECT |
-| host `www.googleapis.com` | `scripts/sobe_para_drive.py` | 403 no CONNECT |
+| env var `OPENAI_API_KEY` | `scripts/gera_imagem.py openai` | presente, validada com imagem real |
+| env var `GEMINI_API_KEY` | `scripts/gera_imagem.py gemini` | presente, validada com imagem real |
+| host `api.openai.com` | idem | liberado |
+| host `generativelanguage.googleapis.com` | idem (liberar `www.googleapis.com` não cobre) | liberado |
+| host `www.googleapis.com` | `scripts/sobe_para_drive.py` | liberado; falta o token OAuth gerado fora (`GOOGLE_OAUTH_TOKEN`) |
 
-Conferir depois de cadastrar, em sessão nova: `printenv | grep -c API_KEY` (esperado 3) e `python3 scripts/gera_imagem.py --listar`.
+Conferir em sessão nova: `printenv | grep -c API_KEY` (esperado 3) e `python3 scripts/gera_imagem.py --listar`.
 
 ## Conectores (cada um exige ação do usuário)
 

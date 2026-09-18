@@ -26,6 +26,6 @@ Depois: coloque o bruto no Drive (pasta pública) ou anexe na conversa, escreva 
 | Metricool | Agendamento | Marca `porcin.ia`, blog_id 6741530 (Instagram + Facebook) |
 | ElevenLabs | Transcrição, trilha, SFX, TTS | Chave `sk_...` na env var e no `.env` do video-use |
 | Kairogen | B-roll por IA | Conta da agência, plano FREE sem créditos (indisponível) |
-| OpenAI / Gemini | Imagem (`scripts/gera_imagem.py`) | Chaves e allowlist ainda não cadastradas neste environment |
+| OpenAI / Gemini | Imagem (`scripts/gera_imagem.py`) | Chaves na env var, hosts liberados, validado em 18/set/2026 |
 
 > Este repositório é **público** de propósito: o agendamento no Metricool depende de servir o render por `raw.githubusercontent.com`. Nunca commitar chaves aqui.
