@@ -59,9 +59,9 @@ Uma fórmula, com o verbo variando pelo conteúdo:
 
 É literalmente o que a pauta de setembro usa nos dezesseis posts. Para vídeo, mesma frase falada no fim, sem "link na bio".
 
-## 6. Três decisões que só você e a cliente podem tomar
+## 6. Decisões: uma fechada, duas abertas
 
-**Decisão 1: como se escreve o nome.** O material está inconsistente. A pauta de junho usa "Porcini.ai" com link para `porcini.ai`. A de setembro usa "Porcin.IA". O Instagram é `@porcin.ia`, o site que a agência cita é `porcin.ia.br`, e o Metricool registra a marca como `porcin.ia`. Proponho **Porcin.IA** em texto público, por ser o mais recente e bater com o perfil. Confirme, porque isso aparece em toda caption e em todo lettering.
+**Decisão 1: como se escreve o nome. FECHADA em 18/set/2026: `Porcin.IA`.** Já é regra inegociável no `FRAMEWORK.md` e no `CLAUDE.md`, e o rodapé das composições Remotion foi corrigido. Ficam de fora da regra o perfil `@porcin.ia` e o domínio `porcin.ia.br`, que são endereços. Abre uma pergunta nova: **como o nome é falado em narração**, que precisa ser resolvida junto com a Decisão 2.
 
 **Decisão 2: quem apresenta o vídeo.** Existem dois caminhos já iniciados e nenhum concluído. O briefing de logo e avatar pede um avatar animado do porco como apresentador, com cara de professor, autoridade e carisma, textura realista. E existe uma pasta de fotos em alta resolução da fundadora. Vídeo com avatar, com a fundadora, ou os dois em formatos diferentes? Isso define todo o pipeline de produção.
 

@@ -14,7 +14,7 @@ export const RemotionRoot: React.FC = () => (
       defaultProps={{
         titulo: "A primeira IA do Brasil só de suinocultura",
         destaque: "suinocultura",
-        rodape: "porcin.ia",
+        rodape: "Porcin.IA",
       }}
     />
     <Composition
@@ -27,7 +27,7 @@ export const RemotionRoot: React.FC = () => (
       defaultProps={{
         titulo: "A primeira IA do Brasil só de suinocultura",
         destaque: "suinocultura",
-        rodape: "porcin.ia",
+        rodape: "Porcin.IA",
       }}
     />
   </>

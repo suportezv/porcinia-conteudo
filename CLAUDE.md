@@ -31,6 +31,8 @@ Achados que já valem como restrição de produção, porque são instrução es
 
 ## Regras que valem em qualquer resposta pública
 
+- **Grafia da marca em texto público: `Porcin.IA`** (decidido pelo usuário em 18/set/2026, fecha a Decisão 1 da proposta). P maiúsculo, sem "i" depois de "Porcin", ponto, IA em maiúsculas. Nunca `Porcini`, `Porcini.ai`, `Porcin.ai`, `Porcinia` nem `PORCIN.IA`. Duas exceções, porque são endereços e não o nome: o perfil `@porcin.ia` e o domínio `porcin.ia.br`. Citação de nome de arquivo da cliente no Drive (`Porcini_IA_v11_final`, `Porcini - Setembro/Outubro`) mantém a grafia original, porque é referência, não uso da marca.
+  - **Pronúncia para narração: PENDENTE.** O estúdio irmão pagou caro por não ter isso escrito. Definir junto com a Decisão 2 (quem apresenta) e validar com STT antes de gerar lote de áudio.
 - Nunca usar travessão em texto público (caption, lettering, legenda): reescrever a frase.
 - Quando citar a criadora: sempre a credencial completa, **PENDENTE confirmar a forma** (base: Dra. Vera Letticie de Azevedo Ruiz, médica veterinária, professora da FZEA-USP, fundadora da Porcin.IA).
 - Palavrão em vídeo **se bipa, não se corta**.

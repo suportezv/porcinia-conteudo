@@ -13,10 +13,11 @@ Estúdio de edição e agendamento para as redes da **Porcin.IA** (IA para suino
 
 ### REGRAS INEGOCIÁVEIS
 
-1. **Nunca usar travessão em texto público.** Reescrever a frase.
-2. Credencial sempre completa quando citar a criadora (forma **PENDENTE confirmar**).
-3. Palavrão em vídeo **se bipa, não se corta** (sine 1000 Hz curto, voz mutada no trecho).
-4. Loudness final: **-14 LUFS**.
+1. **A marca se escreve `Porcin.IA` em texto público.** Nunca `Porcini`, `Porcini.ai`, `Porcin.ai` nem `Porcinia`. Exceções: o perfil `@porcin.ia` e o domínio `porcin.ia.br`, que são endereços.
+2. **Nunca usar travessão em texto público.** Reescrever a frase.
+3. Credencial sempre completa quando citar a criadora (forma **PENDENTE confirmar**).
+4. Palavrão em vídeo **se bipa, não se corta** (sine 1000 Hz curto, voz mutada no trecho).
+5. Loudness final: **-14 LUFS**.
 
 ## Pilares de conteúdo
 
