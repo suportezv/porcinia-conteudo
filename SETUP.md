@@ -25,6 +25,15 @@ Geração de imagem e upload para o Drive (estado em 18/set/2026, depois da libe
 
 Conferir em sessão nova: `printenv | grep -c API_KEY` (esperado 3) e `python3 scripts/gera_imagem.py --listar`.
 
+HyperFrames (estado em 18/set/2026):
+
+| Item | Para quê | Estado |
+|---|---|---|
+| `.claude/settings.json` | `HYPERFRAMES_BROWSER_PATH` e `HYPERFRAMES_SKIP_SKILLS` para o CLI | versionado no repo; vale em sessão nova |
+| `/usr/local/bin/hf-headless-shell` | browser do render local (Playwright) | criado pelo `setup.sh` |
+| host `cdn.jsdelivr.net` | GSAP dos templates e blocos | **403, liberar** |
+| host `raw.githubusercontent.com` | registry de blocos (`hyperframes add`) e `skills update` | 403; opcional, as skills vêm do clone |
+
 ## Conectores (cada um exige ação do usuário)
 
 - **Google Drive**: conector oficial do Claude + pastas de brutos com "qualquer pessoa com o link: leitor" (download direto por curl, qualquer tamanho). Pasta de brutos da Porcin.IA: **PENDENTE**. Material da marca já localizado: ids no `CLAUDE.md`.
@@ -45,7 +54,7 @@ Leitura: `401` é escopo ausente; `400`, `404` ou `422` é escopo presente e ped
 
 ## Validação final
 
-1. `bash scripts/validate.sh` todo verde: filtros do ffmpeg, `is_portrait_source` acertando retrato, paisagem e girado, chave da ElevenLabs, rede, render de 1 frame no Remotion, skills registradas.
+1. `bash scripts/validate.sh` todo verde: filtros do ffmpeg, `is_portrait_source` acertando retrato, paisagem e girado, chave da ElevenLabs, rede, render de 1 frame no Remotion, skills registradas, render de 300 frames no HyperFrames.
 2. Metricool: `getBrandSettings` lista `porcin.ia` com blog_id 6741530.
 3. Kairogen: `get_me_context` mostra plano e créditos.
 4. Teste de fumaça dos scripts: `python3 scripts/gera_imagem.py --listar` (depende das chaves) e `python3 scripts/zip_index_remoto.py list <id de ZIP público>`.

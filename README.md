@@ -9,6 +9,7 @@ Estúdio de edição e agendamento de conteúdo para as redes da **Porcin.IA**, 
 - **`scripts/`**: setup e validação do ambiente, mais os scripts genéricos do estúdio (decupagem por âncora de texto, relatório, LUT S-Log2, índice remoto de ZIP, geração de imagem, upload para o Drive).
 - **`remotion/`**: composições Remotion (React/TS). Paleta em `src/marca.ts`, rodapé em `src/Root.tsx`.
 - **`assets/fonts/`**: fontes embutidas para o render (sem rede de fontes no cloud).
+- **`.claude/settings.json`**: variáveis de ambiente da sessão (browser e skills do HyperFrames).
 - **`patches/`**: histórico. O patch do `is_portrait_source` está aposentado; o `validate.sh` testa o comportamento.
 
 ## Primeiro uso (cloud)

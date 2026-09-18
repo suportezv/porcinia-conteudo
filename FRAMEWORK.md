@@ -44,6 +44,8 @@ O estúdio mantém os dois, e a escolha **não é preferência do momento**: cad
 
 **Padrão declarado: HyperFrames.** Ele é o que está integrado ao fluxo do estúdio e o que tem as 20 skills. O Remotion entra por decisão consciente, não por inércia.
 
+Estado em 18/set/2026: o pipeline local do HyperFrames está validado (browser, captura, encode), mas templates e blocos carregam o GSAP de `cdn.jsdelivr.net`, ainda fora da allowlist. Até liberar, peça em HyperFrames exige GSAP copiado para `vendor/`; o Remotion é o único que renderiza uma peça sem contorno.
+
 **Custo de manter os dois, para vigiar**: dois `node_modules`, dois caminhos de render e dois lugares onde a paleta pode divergir. O terceiro está mitigado: os tokens do Remotion vivem em `remotion/src/marca.ts`. **Se a paleta da marca mudar, atualizar os dois lados.** Se em alguns meses o Remotion não tiver sido usado em nada, ele vira peso morto e se corta; o inverso não vale, porque o HyperFrames é o que sustenta o fluxo.
 
 Componentes Remotion já prontos: `Aurora` (fundo com manchas desfocadas nas cores da marca sobre base clara) e `CartaoTitulo` (título com revelação palavra a palavra e uma palavra em destaque no magenta). Composições `CartaoTituloVertical` (1080x1920) e `CartaoTituloQuadrado` (1080x1080).
