@@ -40,6 +40,30 @@ Duas vezes por semana, quarta e sexta, no pico da tarde. Os dias já tinham post
 
 Os stories estáticos de cada pasta **não foram agendados**, aguardam decisão.
 
+### Conferência contra o que já estava na fila
+
+Cada dia usado já tinha um post, e nenhum deles é a mesma arte nem o mesmo tema:
+
+| Dia | Já existia | Arte nova às 18h |
+|---|---|---|
+| 23/09 | 12:00 ração boa e ganho ruim (carrossel) | 17 colostro |
+| 25/09 | 10:00 erros de maternidade (carrossel) | 21 água |
+| 30/09 | 12:00 diarreia e antibiótico (carrossel) | 19 matérias-primas |
+| 02/10 | 10:00 mercado e ajuste nutricional | 24 biosseguridade |
+| 07/10 | 12:00 calor e densidade energética | 22 maternidade |
+| 09/10 | 10:00 calor e formulação de verão | 20 estresse |
+| 14/10 | 12:00 tratamento de água | 18 temperatura |
+| 16/10 | nada | 23 restrição (às 10h) |
+
+As artes da fila antiga são os posts 1 a 16 da série, revisados em julho e agosto; as oito novas são 17 a 24. O deck `Posts_11a20.pptx` confirma pela numeração: o comentário da cliente pedindo "Frio reduz o consumo de ração, piora o desempenho e aumenta o risco de doenças" é o post 18, que é exatamente a arte de temperatura desta leva. O post 15 foi retirado pela cliente naquela revisão.
+
+**Duas colisões de frase, encontradas e corrigidas antes de publicar:**
+
+1. A legenda do 09/10 abria com "Você pagou pela vacina", exatamente como a do 06/10, três dias antes. Reescrita para abrir em "Estresse não aparece em nenhuma linha da planilha".
+2. A legenda do 16/10 usava "prejuízo adiado", expressão que fecha a do 02/10. Reescrita para "Tem corte que você desfaz na semana seguinte".
+
+Fica um alerta de proximidade temática, não de duplicação: o post de 13/10 fala em restrição quantitativa dentro de uma leitura de mercado, e o de 16/10 fala em quantidade contra qualidade. Artes e ângulos diferentes, três dias de distância. Se incomodar, o de 16/10 anda para 21/10.
+
 ## Correção de rota no calendário existente
 
 Os 22 posts agendados em 15/set (16/09 a 15/10) estavam **apenas no Facebook**, apesar de a marca ter Instagram e Facebook conectados. O Instagram estava com a fila vazia.
