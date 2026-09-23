@@ -82,6 +82,10 @@ Mapa dos 11 estáticos de outubro, todos da série 06 a 16, nenhum da série 17 
 | Post 15 | água de qualidade não é custo, é investimento | 14/10 |
 | Post 16 | conversão hídrica, cerca de 4 litros por quilo | 15/10 |
 
+**Varredura exaustiva do calendário (23/set):** consultado de 01/jan/2026 a 31/mar/2027. Fora da janela 16/09 a 16/10 o calendário está **vazio**. O universo completo da marca são 24 posts: 6 já publicados, 16 da leva antiga e os 8 de hoje. Nenhum post anterior existe, então as artes 17 a 20, que existem no Drive desde junho e julho, nunca chegaram a ser agendadas.
+
+**Limite honesto desta verificação:** a mídia dos posts agendados vive em `static.metricool.com`, e esse host, mais `app.metricool.com`, `api.metricool.com`, `facebook.com` e o CDN da Meta, respondem **403 no CONNECT**. Não há rota para abrir a imagem de um post agendado a partir deste environment. A conferência foi feita pelo texto: a legenda de cada um dos 24 posts, cruzada com o texto lido das artes originais no Drive. Para conferência visual de post agendado, liberar `static.metricool.com` na allowlist resolve de forma permanente.
+
 **Três achados na fila que já existia, nenhum causado por esta sessão:**
 
 1. **Contradição de conteúdo em dois dias.** O post 06 (07/10) manda aumentar a densidade energética no calor. O post 11 (09/10) manda reduzir. As duas legendas carregam a contradição. Tecnicamente os dois têm contexto que os reconcilia, mas publicados a dois dias de distância, para o mesmo público, viram erro.
